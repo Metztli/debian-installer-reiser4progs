@@ -45,21 +45,21 @@ configure-reiser4progs-stamp:
 	cd $(CURDIR)/build/reiser4progs && $(CONFIGURE) --with-readline
 	touch $@
 
-#configure/mkreiser4-udeb configure/reiser4progs-udeb:: configure-udebs-stamp
-#configure-udebs-stamp::
-#	mkdir -p $(CURDIR)/build/udebs
-#	cd $(CURDIR)/build/udebs && $(CONFIGURE) --with-readline=no 
-#	touch $@
+configure/mkreiser4-udeb configure/reiser4progs-udeb:: configure-udebs-stamp
+configure-udebs-stamp::
+	mkdir -p $(CURDIR)/build/udebs
+	cd $(CURDIR)/build/udebs && $(CONFIGURE) --with-readline=no 
+	touch $@
 
 build/libreiser4-dev build/reiser4progs:: build-reiser4progs-stamp
 build-reiser4progs-stamp:
 	$(MAKE) -C $(CURDIR)/build/reiser4progs
 	touch $@
 
-#build/mkreiser4-udeb build/reiser4progs-udeb:: build-udebs-stamp
-#build-udebs-stamp::
-#	$(MAKE) -C $(CURDIR)/build/udebs
-#	touch $@
+build/mkreiser4-udeb build/reiser4progs-udeb:: build-udebs-stamp
+build-udebs-stamp::
+	$(MAKE) -C $(CURDIR)/build/udebs
+	touch $@
 
 install/reiser4progs:: install-reiser4progs-stamp
 install-reiser4progs-stamp:
@@ -82,21 +82,21 @@ install-libreiser4-dev-stamp::
 	rm -rf $(CURDIR)/debian/libreiser4-dev/usr/share/doc/{AUTHORS,BUGS,README,THANKS}
 	rm -f $(CURDIR)/debian/libreiser4-dev/usr/lib/*.la
 
-#install/mkreiser4-udeb:: install-mkreiser4-udeb-stamp
-#install-mkreiser4-udeb-stamp::
-#	$(MAKE) -C $(CURDIR)/build/udebs install DESTDIR=$(CURDIR)/debian/mkreiser4-udeb/
-#	mv $(CURDIR)/debian/mkreiser4-udeb/usr/sbin $(CURDIR)/debian/mkreiser4-udeb/
-#	rm -rf $(CURDIR)/debian/mkreiser4-udeb/sbin/make_reiser4
-#	rm -rf $(CURDIR)/debian/mkreiser4-udeb/usr
-#	rm -rf $(CURDIR)/debian/mkreiser4-udeb/sbin/{debugfs.reiser4,fsck.reiser4,measurefs.reiser4}
+install/mkreiser4-udeb:: install-mkreiser4-udeb-stamp
+install-mkreiser4-udeb-stamp::
+	$(MAKE) -C $(CURDIR)/build/udebs install DESTDIR=$(CURDIR)/debian/mkreiser4-udeb/
+	mv $(CURDIR)/debian/mkreiser4-udeb/usr/sbin $(CURDIR)/debian/mkreiser4-udeb/
+	rm -rf $(CURDIR)/debian/mkreiser4-udeb/sbin/make_reiser4
+	rm -rf $(CURDIR)/debian/mkreiser4-udeb/usr
+	rm -rf $(CURDIR)/debian/mkreiser4-udeb/sbin/{debugfs.reiser4,fsck.reiser4,measurefs.reiser4}
 
-#install/reiser4progs-udeb:: install-reiser4progs-udeb-stamp
-#install-reiser4progs-udeb-stamp::
-#	$(MAKE) -C $(CURDIR)/build/udebs install DESTDIR=$(CURDIR)/debian/reiser4progs-udeb/
-#	mv $(CURDIR)/debian/reiser4progs-udeb/usr/sbin $(CURDIR)/debian/reiser4progs-udeb/
-#	rm -rf $(CURDIR)/debian/reiser4progs-udeb/sbin/make_reiser4
-#	rm -rf $(CURDIR)/debian/reiser4progs-udeb/usr
-#	rm -rf $(CURDIR)/debian/reiser4progs-udeb/sbin/{mkfs.reiser4,measurefs.reiser4}
+install/reiser4progs-udeb:: install-reiser4progs-udeb-stamp
+install-reiser4progs-udeb-stamp::
+	$(MAKE) -C $(CURDIR)/build/udebs install DESTDIR=$(CURDIR)/debian/reiser4progs-udeb/
+	mv $(CURDIR)/debian/reiser4progs-udeb/usr/sbin $(CURDIR)/debian/reiser4progs-udeb/
+	rm -rf $(CURDIR)/debian/reiser4progs-udeb/sbin/make_reiser4
+	rm -rf $(CURDIR)/debian/reiser4progs-udeb/usr
+	rm -rf $(CURDIR)/debian/reiser4progs-udeb/sbin/{mkfs.reiser4,measurefs.reiser4}
 
 clean::
 	dh_autoreconf_clean

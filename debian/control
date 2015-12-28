@@ -17,6 +17,23 @@ Description: administration utilities for the Reiser4 filesystem
    - measurefs.reiser4
    - mkfs.reiser4
 
+Package: reiser4progs-udeb
+XC-Package-Type: udeb
+Section: debian-installer
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: user-level tools to manage Reiser4 filesystems
+ This installer module contains utilities to check, resize, and debug 
+ Reiser4 filesystems. 
+
+Package: mkreiser4-udeb
+XC-Package-Type: udeb
+Section: debian-installer
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: user-level tool to make Reiser4 filesystems
+ This installer module contains the utility to create Reiser4 filesystems.
+
 Package: libreiser4-dev
 Section: libdevel
 Priority: extra
