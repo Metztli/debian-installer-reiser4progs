@@ -1,3 +1,16 @@
+reiser4progs (1.1.0-3) unstable; urgency=medium
+
+  * Compile with -fPIC on mips and mipsel. Patch by Radovan Birdic.
+    (Closes: #844739)
+
+ -- Felix Zielcke <fzielcke@z-51.de>  Fri, 18 Nov 2016 16:25:49 +0100
+
+reiser4progs (1.1.0-2) unstable; urgency=medium
+
+  * Build-depend on libaal >= 1.0.6-2 to fix FTBFS (Closes: #841613)
+
+ -- Felix Zielcke <fzielcke@z-51.de>  Fri, 21 Oct 2016 16:39:50 +0200
+
 reiser4progs (1.1.0-1.1) unstable; urgency=medium
 
   * NMU

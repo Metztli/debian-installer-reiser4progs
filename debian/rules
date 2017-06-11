@@ -25,7 +25,14 @@ ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 endif
 
 export DEB_BUILD_MAINT_OPTIONS=hardening=-format
-export DEB_CFLAGS_MAINT_APPEND = -I$(CURDIR)
+
+DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
+ifneq (,$(filter $(DEB_BUILD_ARCH),mips mipsel))
+	export DEB_CFLAGS_MAINT_APPEND = -I$(CURDIR) -fPIC
+    else
+	export DEB_CFLAGS_MAINT_APPEND = -I$(CURDIR)
+endif
+
 CFLAGS = `dpkg-buildflags --get CFLAGS`
 CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
 LDFLAGS = `dpkg-buildflags --get LDFLAGS`
