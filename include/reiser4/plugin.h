@@ -93,7 +93,7 @@ struct reiser4_plug {
  * NOTE: Make sure that respective marco is also incremented in
  * the new release of reiser4 kernel module.
  */
-#define PLUGIN_LIBRARY_VERSION 1
+#define PLUGIN_LIBRARY_VERSION 2
 
 /* Known by library plugin types. */
 typedef enum reiser4_plug_type {
@@ -264,6 +264,7 @@ enum reiser4_perm_plug_id {
 enum reiser4_compress_plug_id {
 	COMPRESS_LZO1_ID	= 0x0,
 	COMPRESS_GZIP1_ID	= 0x1,
+	COMPRESS_ZSTD1_ID	= 0x2,
 	COMPRESS_LAST_ID
 };
 

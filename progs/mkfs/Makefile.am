@@ -1,14 +1,14 @@
 sbin_PROGRAMS 		= mkfs.reiser4
 mkfs_reiser4_SOURCES 	= mkfs.c
 
-mkfs_reiser4_LDADD 	= $(top_builddir)/libreiser4/libreiser4.la \
-			  $(top_builddir)/libmisc/libmisc.la \
+mkfs_reiser4_LDADD 	= $(top_builddir)/libmisc/libmisc.la \
+			  $(top_builddir)/libreiser4/libreiser4.la \
 			  $(PROGS_LIBS)
 
 mkfs_reiser4_LDFLAGS    = @PROGS_LDFLAGS@
 mkfs_reiser4_CFLAGS 	= @GENERIC_CFLAGS@
 
-INCLUDES		= -I$(top_srcdir)/include
+AM_CPPFLAGS		= -I$(top_srcdir)/include
 
 uninstall-make_reiser4:
 	if test -f $(DESTDIR)$(sbindir)/make_reiser4; then \

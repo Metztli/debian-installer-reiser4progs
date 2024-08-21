@@ -1,4 +1,4 @@
-SUBDIRS         = libaux plugin libreiser4 librepair libmisc progs include doc demos
+SUBDIRS         = libaux libmisc plugin libreiser4 librepair progs include doc demos
 
 EXTRA_DIST	= AUTHORS COPYING TODO NEWS BUGS README CREDITS THANKS \
 		  reiser4progs.spec.in reiser4progs.spec libreiser4.m4 \
@@ -8,15 +8,15 @@ EXTRA_DIST	= AUTHORS COPYING TODO NEWS BUGS README CREDITS THANKS \
 aclocaldir 	= $(datadir)/aclocal
 aclocal_DATA	= libreiser4.m4
 
-define all-sources
+define all_sources
 	( find ./ -name '*.[ch]' | grep -v SCCS | grep -v "Attic" | grep -v "reiser4progs" )
 endef
 
 TAGS:
-	$(all-sources) | etags -
+	$(all_sources) | etags -
 
 tags:
-	$(all-sources) | xargs -- ctags -w -o TAGS
+	$(all_sources) | xargs -- ctags -w -o TAGS
 
 install-exec-hook:
 	./run-ldconfig $(libdir)

@@ -2,13 +2,19 @@ Source: reiser4progs
 Section: admin
 Priority: optional
 Maintainer: Felix Zielcke <fzielcke@z-51.de>
-Build-Depends: debhelper (>= 9), cdbs, libaal-dev (>= 1.0.6-3), libaal-dev (<< 1.0.7), uuid-dev, libreadline-gplv2-dev, dh-autoreconf
-Standards-Version: 3.9.6
+Build-Depends: debhelper-compat (=13),
+               dh-sequence-movetousr,
+               libaal-dev (<< 1.0.8),
+               libaal-dev (>= 1.0.7),
+               libedit-dev,
+               uuid-dev
+Standards-Version: 4.7.0
 Homepage: https://reiser4.wiki.kernel.org
+Rules-Requires-Root: no
 
 Package: reiser4progs
 Architecture: linux-any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: administration utilities for the Reiser4 filesystem
  The following utilities to manage Reiser4 filesystems are provided:
  .
@@ -20,7 +26,7 @@ Description: administration utilities for the Reiser4 filesystem
 Package: reiser4progs-udeb
 XC-Package-Type: udeb
 Section: debian-installer
-Architecture: any
+Architecture: linux-any
 Depends: ${shlibs:Depends}
 Description: user-level tools to manage Reiser4 filesystems
  This installer module contains utilities to check, resize, and debug 
@@ -29,18 +35,17 @@ Description: user-level tools to manage Reiser4 filesystems
 Package: mkreiser4-udeb
 XC-Package-Type: udeb
 Section: debian-installer
-Architecture: any
+Architecture: linux-any
 Depends: ${shlibs:Depends}
 Description: user-level tool to make Reiser4 filesystems
  This installer module contains the utility to create Reiser4 filesystems.
 
 Package: libreiser4-dev
 Section: libdevel
-Priority: extra
 Architecture: linux-any
-Depends: ${misc:Depends}, libc6-dev | libc-dev, libaal-dev (>= 1.0.6), uuid-dev, libreadline-gplv2-dev, libncurses5-dev
+Multi-Arch: same
+Depends: libaal-dev (>= 1.0.7), libc6-dev | libc-dev, uuid-dev, ${misc:Depends}
 Description: Reiser4's filesystem access and manipulation library. Devel files
- These are the development files for Reiser4 libraries. 
+ These are the development files for Reiser4 libraries.
  .
  They are part of the Reiser4's filesystem support tools.
-

@@ -4,6 +4,14 @@
    librepair/master.c - methods are needed for work with broken master 
    super block. */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
+#if defined(HAVE_LIBUUID) && defined(HAVE_UUID_UUID_H)
+#  include <uuid/uuid.h>
+#endif
+
 #include <repair/librepair.h>
 
 /* Checks the blocksize. */
@@ -147,10 +155,10 @@ errno_t repair_master_check_struct(reiser4_fs_t *fs,
 			fsck_mess("UUID (0x%llx%llx) found in the master super "
 				  "block does not match the one found in the "
 				  "backup (0x%llx%llx).%s",
-				  x[0],
-				  x[1],
-				  y[0],
-				  y[1],
+				  (unsigned long long)x[0],
+				  (unsigned long long)x[1],
+				  (unsigned long long)y[0],
+				  (unsigned long long)y[1],
 				  mode != RM_CHECK ? " Fixed." : "");
 
 			if (mode == RM_CHECK)
@@ -347,9 +355,9 @@ void repair_master_print(reiser4_master_t *master,
 			  pid, plug ? plug->label : "absent");
 
 #if defined(HAVE_LIBUUID) && defined(HAVE_UUID_UUID_H)
-	if (*master->ent.ms_uuid != '\0') {
+	if (!uuid_is_null((unsigned char *)master->ent.ms_uuid)) {
 		char uuid[37];
-		
+
 		uuid[36] = '\0';
 		unparse(reiser4_master_get_uuid(master), uuid);
 		aal_stream_format(stream, "uuid:\t\t%s\n", uuid);
